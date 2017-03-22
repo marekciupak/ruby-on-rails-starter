@@ -1,0 +1,29 @@
+---
+  - name: install PostgreSQL
+    become: true
+    apt:
+      pkg: "{{ item }}"
+      state: present
+      update_cache: yes
+      cache_valid_time: 3600
+    with_items:
+      - postgresql
+      - python-psycopg2
+      - postgresql-contrib
+      - postgresql-server-dev-9.5
+
+  - name: create a role in PostgreSQL
+    become: yes
+    become_user: postgres
+    postgresql_user:
+      name: "{{ username }}"
+      role_attr_flags: SUPERUSER
+
+  - name: create a database in PostgreSQL
+    become: yes
+    become_user: postgres
+    postgresql_db:
+      name: "{{ username }}"
+      owner: "{{ username }}"
+      encoding: UTF8
+      template: template0

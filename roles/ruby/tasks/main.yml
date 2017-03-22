@@ -1,0 +1,63 @@
+---
+  - name: "install ruby dependencies"
+    become: true
+    apt:
+      pkg: "{{ item }}"
+      state: present
+      update_cache: yes
+      cache_valid_time: 3600
+    with_items:
+      - git-core
+      - curl
+      - zlib1g-dev
+      - build-essential
+      - libssl-dev
+      - libreadline-dev
+      - libyaml-dev
+      - libxml2-dev
+      - libxslt1-dev
+      - libcurl4-openssl-dev
+      - python-software-properties
+
+  - name: "create installs directory"
+    file:
+      dest: ~/installs
+      state: directory
+
+  - name: "download ruby source"
+    get_url:
+      url: http://ftp.ruby-lang.org/pub/ruby/{{ruby_version[0]}}.{{ruby_version[2]}}/ruby-{{ruby_version}}.tar.gz
+      dest: ~/installs/ruby-{{ruby_version}}.tar.gz
+
+  - name: "Unpack ruby source"
+    unarchive:
+      src: ~/installs/ruby-{{ruby_version}}.tar.gz
+      dest: ~/installs
+      remote_src: yes
+      creates: ~/installs/ruby-{{ruby_version}}
+
+  - name: "configure ruby installation"
+    shell: ./configure
+    args:
+      chdir: ~/installs/ruby-{{ruby_version}}
+      creates: ~/installs/ruby-{{ruby_version}}/Makefile
+
+  - name: "compile ruby"
+    shell: make
+    args:
+      chdir: ~/installs/ruby-{{ruby_version}}
+      creates: ~/installs/ruby-{{ruby_version}}/ruby
+
+  - name: "install ruby"
+    become: true
+    shell: make install
+    args:
+      chdir: ~/installs/ruby-{{ruby_version}}
+      creates: /usr/local/bin/ruby
+
+  - name: "add gem binaries to $PATH"
+    become: true
+    lineinfile:
+      dest: /etc/profile
+      line: 'PATH="/usr/local/bin:$PATH"'
+      state: present

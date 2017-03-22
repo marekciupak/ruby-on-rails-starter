@@ -1,0 +1,9 @@
+---
+- hosts: all
+  user: ubuntu
+
+  roles:
+    - role: utils
+    - role: ruby
+    - role: nodejs
+    - role: postgresql
