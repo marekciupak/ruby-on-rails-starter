@@ -38,9 +38,9 @@
 
     `vagrant ssh -c 'cd /vagrant/sample-app && bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails server --binding=0.0.0.0'`
 
-    Open in the browser: http://192.168.33.10:3000/. You should see "Yay! You’re on Rails!".
+7. Open in the browser: http://192.168.33.10:3000/ and test if it works. You should see: "Yay! You’re on Rails!".
 
-    Stop the server by pressing Ctrl+C in Cmder window.
+8. Go back to Cmder window. Stop the the server by pressing Ctrl+C and run the following command afterwards
 
     `vagrant halt`
 
