@@ -31,6 +31,8 @@
 6. Run Cmder and execute following commands
 
     `cd %UserProfile%\Desktop\`
+    
+    `cd ruby-on-rails-starter-master`
 
     `vagrant up`
 
