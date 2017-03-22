@@ -1,0 +1,14 @@
+---
+  - name: "install gems"
+    bundler:
+      state: present
+      gemfile: /vagrant/sample-app/Gemfile
+      executable: /home/vagrant/.rvm/gems/ruby-{{ ruby_version }}/bin/bundler
+    environment:
+      PATH: "{{ lookup('env', 'PATH') }}:\
+             {{ ansible_env.HOME }}/.rvm/gems/ruby-{{ ruby_version }}/bin:\
+             {{ ansible_env.HOME }}/.rvm/gems/ruby-{{ ruby_version }}@global/bin:\
+             {{ ansible_env.HOME }}/.rvm/rubies/ruby-{{ ruby_version }}/bin:\
+             {{ ansible_env.HOME }}/.rvm/bin"
+      GEM_PATH: "{{ ansible_env.HOME }}/.rvm/gems/ruby-{{ ruby_version }}:\
+                 {{ ansible_env.HOME }}/.rvm/gems/ruby-{{ ruby_version }}@global"

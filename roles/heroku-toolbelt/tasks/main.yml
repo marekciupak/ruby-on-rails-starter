@@ -1,0 +1,23 @@
+---
+  - name: install heroku apt key
+    become: true
+    apt_key:
+      url: https://cli-assets.heroku.com/apt/release.key
+      state: present
+
+  - name: add heroku apt repo
+    become: true
+    apt_repository:
+      repo: "deb https://cli-assets.heroku.com/branches/stable/apt ./"
+      state: present
+      update_cache: yes
+
+  - name: install heroku-toolbelt
+    become: true
+    apt:
+      pkg: "{{ item }}"
+      state: present
+      update_cache: yes
+      cache_valid_time: 3600
+    with_items:
+      - heroku

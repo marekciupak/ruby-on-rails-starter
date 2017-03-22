@@ -1,9 +1,13 @@
 ---
 - hosts: all
-  user: ubuntu
+  user: vagrant
 
   roles:
     - role: utils
-    - role: ruby
+    - role: rvm_io.ruby
+      rvm1_rubies: ["ruby-2.4.0"]
+      rvm1_user: vagrant
     - role: nodejs
     - role: postgresql
+    - role: sample-app
+    - role: heroku-toolbelt

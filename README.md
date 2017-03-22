@@ -1,30 +1,47 @@
-# Preparing the environment for application development in Ruby on Rails
+# Create you accounts
+
+1. If you don't have an account on https://github.com/, create one.
+
+2. If you don't have an account on https://www.heroku.com/, create one.
+
+# Prepare the environment
 
 ## For Windows
 
-### 1. Install Docker
+1. Install Atom
 
-Docker is a platform for developers and sysadmins to build, ship, and run distributed applications.
+  https://github.com/atom/atom/releases/download/v1.15.0/AtomSetup.exe
 
-We will use it to isolate all the software, required to run our app, into a virtual container. This is a simple way to
-ensure that each of us will be using the same version of the software and libraries.
+2. Install VirtualBox
 
-Install Docker Toolbox from https://www.docker.com/products/docker-toolbox.
+  http://download.virtualbox.org/virtualbox/5.1.18/VirtualBox-5.1.18-114002-Win.exe
 
-### 2. Install Git
+3. Install Vagrant
 
-Git is a version control system (VCS) for tracking changes in computer files and coordinating work on those files among
-multiple people.
+  https://releases.hashicorp.com/vagrant/1.9.3/vagrant_1.9.3.msi
 
-We will use it to track all the changes that you make in the code.
+4. Download following package and unpack it in your Desktop
 
-Install Git from https://git-scm.com/download/win.
+  https://github.com/marekciupak/ruby-on-rails-starter/archive/master.zip
 
-### 3. Install JetBrains RubyMine
+5. Download Cmder and unpack it in your Desktop
 
-JetBrains RubyMine is an integrated development environment for creating software in Ruby.
+  https://github.com/cmderdev/cmder/releases/download/v1.3.2/cmder_mini.zip
 
-Install it from https://www.jetbrains.com/ruby/.
+6. Run Cmder and execute following commands
 
-If you have email address at your university, then you can apply for a free licence here:
-https://www.jetbrains.com/shop/eform/students.
+  `cd %UserProfile%\Desktop\`
+
+  `vagrant up`
+
+  `vagrant ssh -c 'cd /vagrant/sample-app && bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails server --binding=0.0.0.0'`
+
+  Open in the browser: http://192.168.33.10:3000/. You should see "Yay! You’re on Rails!".
+
+  Stop the server by pressing Ctrl+C in Cmder window.
+
+  `vagrant halt`
+
+# Homework
+
+http://tryruby.org/
