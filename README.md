@@ -26,7 +26,7 @@
 
 5. Download Cmder and unpack it in your Desktop
 
-    https://github.com/cmderdev/cmder/releases/download/v1.3.2/cmder_mini.zip
+    https://github.com/cmderdev/cmder/releases/download/v1.3.2/cmder.zip
 
 6. Run Cmder and execute following commands
 
